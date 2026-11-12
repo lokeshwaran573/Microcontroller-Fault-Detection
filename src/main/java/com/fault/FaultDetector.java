@@ -29,4 +29,35 @@ public class FaultDetector {
 
         return "NORMAL - No Fault Detected";
     }
+
+    // Sensor-based fault detection
+    public String detectSensorFault(
+            double temperature,
+            double voltage,
+            double current) {
+
+        if (!Double.isFinite(temperature)
+                || !Double.isFinite(voltage)
+                || !Double.isFinite(current)) {
+            return "INVALID SENSOR DATA";
+        }
+
+        if (temperature > 60) {
+            return "CRITICAL - High Temperature";
+        }
+
+        if (temperature < 20) {
+            return "WARNING - Low Temperature";
+        }
+
+        if (voltage < 4.5 || voltage > 5.5) {
+            return "CRITICAL - Voltage Abnormal";
+        }
+
+        if (current < 0.1 || current > 2.0) {
+            return "WARNING - Current Abnormal";
+        }
+
+        return "NORMAL - All Sensors Working";
+    }
 }
